@@ -10,16 +10,6 @@
       "filter": "datum.Profession === 'Total'"
     }
   ],
-  "mark": {
-    "type": "line",
-    "point": {
-      "filled": true,
-      "size": 90,
-      "color": "#367b83"
-    },
-    "strokeWidth": 3,
-    "color": "#367b83"
-  },
   "encoding": {
     "x": {
       "field": "Year",
@@ -34,26 +24,64 @@
       "type": "quantitative",
       "title": "Number of healthcare practitioners",
       "scale": {
-        "zero": false
+        "zero": false,
+        "padding": 20
       },
       "axis": {
         "format": ",d"
       }
-    },
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "ordinal",
-        "title": "Year"
-      },
-      {
-        "field": "Headcount",
-        "type": "quantitative",
-        "title": "Practitioners",
-        "format": ","
-      }
-    ]
+    }
   },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#367b83",
+        "point": {
+          "filled": true,
+          "size": 90,
+          "color": "#367b83"
+        }
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "Headcount",
+            "type": "quantitative",
+            "title": "Practitioners",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Year == 2020 || datum.Year == 2024"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -18,
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "#233646"
+      },
+      "encoding": {
+        "text": {
+          "field": "Headcount",
+          "type": "quantitative",
+          "format": ",.0f"
+        }
+      }
+    }
+  ],
   "config": {
     "view": {
       "stroke": null

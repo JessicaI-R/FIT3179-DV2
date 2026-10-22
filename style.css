@@ -136,3 +136,11 @@ footer {
     padding: 15px;
   }
 }
+
+/* Vega-Lite chart containers */
+.vega-chart {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  margin: 20px 0;
+}

@@ -141,6 +141,12 @@ footer {
 .vega-chart {
   width: 100%;
   min-width: 0;
+
+.source-note {
+  font-size: 12px;
+  color: #7b8b92;
+  font-style: italic;
+}
   overflow: hidden;
   margin: 20px 0;
 }

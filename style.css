@@ -150,3 +150,14 @@ footer {
   overflow: hidden;
   margin: 20px 0;
 }
+
+.chart-highlight {
+  font-size: 15px;
+  color: #367b83;
+  margin-bottom: 15px;
+}
+
+.chart-highlight strong {
+  font-size: 25px;
+  margin-right: 6px;
+}

@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
+  "width": 550,
   "height": 300,
   "data": {
-    "url": "data/workforce_history_2020_2024.csv"
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
+    "format": {"type": "csv"}
   },
   "transform": [
     {
@@ -15,21 +16,14 @@
       "field": "Year",
       "type": "ordinal",
       "title": "Year",
-      "axis": {
-        "labelAngle": 0
-      }
+      "axis": {"labelAngle": 0}
     },
     "y": {
       "field": "Headcount",
       "type": "quantitative",
       "title": "Number of healthcare practitioners",
-      "scale": {
-        "zero": false,
-        "padding": 20
-      },
-      "axis": {
-        "format": ",d"
-      }
+      "scale": {"zero": false, "padding": 20},
+      "axis": {"format": ",d"}
     }
   },
   "layer": [
@@ -46,15 +40,10 @@
       },
       "encoding": {
         "tooltip": [
-          {
-            "field": "Year",
-            "type": "ordinal",
-            "title": "Year"
-          },
+          {"field": "Year", "type": "ordinal"},
           {
             "field": "Headcount",
             "type": "quantitative",
-            "title": "Practitioners",
             "format": ","
           }
         ]
@@ -68,10 +57,10 @@
       ],
       "mark": {
         "type": "text",
-        "dy": -18,
+        "dy": -25,
         "fontSize": 14,
         "fontWeight": "bold",
-        "color": "#233646"
+        "color": "#32516a"
       },
       "encoding": {
         "text": {
@@ -83,9 +72,7 @@
     }
   ],
   "config": {
-    "view": {
-      "stroke": null
-    },
+    "view": {"stroke": null},
     "axis": {
       "labelFontSize": 12,
       "titleFontSize": 13

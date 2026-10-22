@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/workforce_history_2020_2024.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Profession === 'Total'"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 90
+    },
+    "strokeWidth": 3,
+    "color": "#367b83"
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "Headcount",
+      "type": "quantitative",
+      "title": "Number of healthcare practitioners",
+      "scale": {
+        "zero": false
+      },
+      "axis": {
+        "format": ",d"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "Headcount",
+        "type": "quantitative",
+        "title": "Practitioners",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13
+    }
+  }
+}

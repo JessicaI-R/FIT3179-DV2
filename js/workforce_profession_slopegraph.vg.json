@@ -1,0 +1,268 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Healthcare Workforce Growth by Profession",
+    "subtitle": "Registered practitioners employed in Australia, 2020 vs 2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.Year == 2020 || datum.Year == 2024"
+    },
+    {
+      "filter": {
+        "field": "Profession",
+        "oneOf": [
+          "Nurses and Midwives",
+          "Medical Practitioners",
+          "Physiotherapists",
+          "Psychologists",
+          "Pharmacists",
+          "Occupational Therapists",
+          "Dental Practitioners",
+          "Paramedicine Practitioners"
+        ]
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "title": {
+        "text": "Largest professions",
+        "anchor": "start",
+        "fontSize": 13
+      },
+      "width": 550,
+      "height": 170,
+      "transform": [
+        {
+          "filter": {
+            "field": "Profession",
+            "oneOf": [
+              "Nurses and Midwives",
+              "Medical Practitioners"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 90
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "sort": [2020, 2024],
+          "scale": {
+            "paddingInner": 0,
+            "paddingOuter": 0.05
+          },
+          "axis": {
+            "title": null,
+            "labelAngle": 0,
+            "labelFontWeight": "bold",
+            "labelFontSize": 13,
+            "ticks": false,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "Headcount",
+          "type": "quantitative",
+          "scale": {
+            "zero": false,
+            "nice": true
+          },
+          "axis": {
+            "title": "Practitioners",
+            "format": "~s",
+            "tickCount": 4
+          }
+        },
+        "color": {
+          "field": "Profession",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Nurses and Midwives",
+              "Medical Practitioners"
+            ],
+            "range": [
+              "#367b83",
+              "#b48b55"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "columns": 2,
+            "labelFontSize": 12
+          }
+        },
+        "detail": {
+          "field": "Profession"
+        },
+        "tooltip": [
+          {
+            "field": "Profession",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "Headcount",
+            "type": "quantitative",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "title": {
+        "text": "Other selected professions",
+        "anchor": "start",
+        "fontSize": 13
+      },
+      "width": 550,
+      "height": 230,
+      "transform": [
+        {
+          "filter": {
+            "field": "Profession",
+            "oneOf": [
+              "Physiotherapists",
+              "Psychologists",
+              "Pharmacists",
+              "Occupational Therapists",
+              "Dental Practitioners",
+              "Paramedicine Practitioners"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 90
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "sort": [2020, 2024],
+          "scale": {
+            "paddingInner": 0,
+            "paddingOuter": 0.05
+          },
+          "axis": {
+            "title": null,
+            "labelAngle": 0,
+            "labelFontWeight": "bold",
+            "labelFontSize": 13,
+            "ticks": false,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "Headcount",
+          "type": "quantitative",
+          "scale": {
+            "zero": false,
+            "nice": true
+          },
+          "axis": {
+            "title": "Practitioners",
+            "format": "~s",
+            "tickCount": 5
+          }
+        },
+        "color": {
+          "field": "Profession",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Physiotherapists",
+              "Psychologists",
+              "Pharmacists",
+              "Occupational Therapists",
+              "Dental Practitioners",
+              "Paramedicine Practitioners"
+            ],
+            "range": [
+              "#9675ad",
+              "#d27d80",
+              "#d49a43",
+              "#679c91",
+              "#6d8ba6",
+              "#789c79"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "columns": 3,
+            "labelFontSize": 11
+          }
+        },
+        "detail": {
+          "field": "Profession"
+        },
+        "tooltip": [
+          {
+            "field": "Profession",
+            "type": "nominal"
+          },
+          {
+            "field": "Year",
+            "type": "ordinal"
+          },
+          {
+            "field": "Headcount",
+            "type": "quantitative",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "y": "independent",
+      "color": "independent"
+    },
+    "legend": {
+      "color": "independent"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "gridColor": "#e5e9eb"
+    },
+    "concat": {
+      "spacing": 15
+    }
+  }
+}

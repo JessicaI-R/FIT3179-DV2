@@ -14,7 +14,8 @@
     "type": "line",
     "point": {
       "filled": true,
-      "size": 90
+      "size": 90,
+      "color": "#367b83"
     },
     "strokeWidth": 3,
     "color": "#367b83"

@@ -1,0 +1,81 @@
+geography,profession,headcount,fte,average_age,average_weekly_hours,population_2024,headcount_per_100k,fte_per_100k
+Major Cities,ATSI Health Practitioners,159,168,43.2,40.0,19800457,0.8,0.85
+Major Cities,Chiropractors,4391,3714,41.8,32.1,19800457,22.18,18.76
+Major Cities,Chinese Medicine Practitioners,3526,2697,52.1,29.1,19800457,17.81,13.62
+Major Cities,Dental Practitioners,19685,17674,42.5,34.1,19800457,99.42,89.26
+Major Cities,Medical Practitioners,95361,95619,45.4,40.1,19800457,481.61,482.91
+Major Cities,Medical Radiation Practitioners,14180,13438,38.1,36.0,19800457,71.61,67.87
+Major Cities,Nurses and Midwives,299956,272713,41.4,34.6,19800457,1514.89,1377.31
+Major Cities,Occupational Therapists,22856,20444,36.3,34.0,19800457,115.43,103.25
+Major Cities,Optometrists,5140,4536,39.7,33.5,19800457,25.96,22.91
+Major Cities,Osteopaths,2432,2089,38.2,32.6,19800457,12.28,10.55
+Major Cities,Pharmacists,24333,22192,39.8,34.7,19800457,122.89,112.08
+Major Cities,Physiotherapists,31217,28637,37.5,34.9,19800457,157.66,144.63
+Major Cities,Podiatrists,4267,4024,39.6,35.8,19800457,21.55,20.32
+Major Cities,Paramedicine Practitioners,13126,15110,36.7,43.7,19800457,66.29,76.31
+Major Cities,Psychologists,30654,25653,45.3,31.8,19800457,154.81,129.56
+Major Cities,Total,571283,528708,41.7,35.5,19800457,2885.2,2670.18
+Inner Regional,ATSI Health Practitioners,156,155,43.0,37.7,4744572,3.29,3.27
+Inner Regional,Chiropractors,1035,854,43.2,31.3,4744572,21.81,18.0
+Inner Regional,Chinese Medicine Practitioners,477,349,50.9,27.8,4744572,10.05,7.36
+Inner Regional,Dental Practitioners,3447,3203,41.2,35.3,4744572,72.65,67.51
+Inner Regional,Medical Practitioners,18155,18163,45.0,40.0,4744572,382.65,382.82
+Inner Regional,Medical Radiation Practitioners,2747,2558,39.0,35.4,4744572,57.9,53.91
+Inner Regional,Nurses and Midwives,72713,64975,44.1,34.1,4744572,1532.55,1369.46
+Inner Regional,Occupational Therapists,4352,3681,38.4,32.1,4744572,91.73,77.58
+Inner Regional,Optometrists,1018,947,40.3,35.4,4744572,21.46,19.96
+Inner Regional,Osteopaths,623,494,40.1,30.1,4744572,13.13,10.41
+Inner Regional,Pharmacists,4532,4132,41.7,34.6,4744572,95.52,87.09
+Inner Regional,Physiotherapists,5251,4682,39.0,33.9,4744572,110.67,98.68
+Inner Regional,Podiatrists,949,891,40.1,35.7,4744572,20.0,18.78
+Inner Regional,Paramedicine Practitioners,5241,6126,38.7,44.4,4744572,110.46,129.12
+Inner Regional,Psychologists,4586,3742,48.8,31.0,4744572,96.66,78.87
+Inner Regional,Total,125282,114951,43.4,35.2,4744572,2640.53,2422.79
+Outer Regional,ATSI Health Practitioners,213,223,46.4,39.7,2141110,9.95,10.42
+Outer Regional,Chiropractors,310,262,43.8,32.1,2141110,14.48,12.24
+Outer Regional,Chinese Medicine Practitioners,107,81,55.1,28.7,2141110,5.0,3.78
+Outer Regional,Dental Practitioners,1208,1116,42.3,35.1,2141110,56.42,52.12
+Outer Regional,Medical Practitioners,6932,7206,44.4,41.6,2141110,323.76,336.55
+Outer Regional,Medical Radiation Practitioners,855,816,38.4,36.3,2141110,39.93,38.11
+Outer Regional,Nurses and Midwives,29668,27432,44.2,35.2,2141110,1385.64,1281.2
+Outer Regional,Occupational Therapists,1599,1419,36.8,33.7,2141110,74.68,66.27
+Outer Regional,Optometrists,308,286,40.4,35.3,2141110,14.39,13.36
+Outer Regional,Osteopaths,,77,40.7,30.0,2141110,,3.6
+Outer Regional,Pharmacists,1872,1790,41.2,36.3,2141110,87.43,83.6
+Outer Regional,Physiotherapists,1823,1636,37.6,34.1,2141110,85.14,76.41
+Outer Regional,Podiatrists,272,266,41.6,37.2,2141110,12.7,12.42
+Outer Regional,Paramedicine Practitioners,2412,3083,38.7,48.6,2141110,112.65,143.99
+Outer Regional,Psychologists,1397,1186,47.9,32.3,2141110,65.25,55.39
+Outer Regional,Total,49074,46879,43.3,36.7,2141110,2291.99,2189.47
+Remote Australia,ATSI Health Practitioners,102,115,45.0,42.8,307902,33.13,37.35
+Remote Australia,Chiropractors,39,32,38.7,30.9,307902,12.67,10.39
+Remote Australia,Chinese Medicine Practitioners,,6,47.7,22.1,307902,,1.95
+Remote Australia,Dental Practitioners,117,109,42.0,35.4,307902,38.0,35.4
+Remote Australia,Medical Practitioners,936,991,44.4,42.3,307902,303.99,321.86
+Remote Australia,Medical Radiation Practitioners,82,78,43.4,36.1,307902,26.63,25.33
+Remote Australia,Nurses and Midwives,4323,4277,43.5,37.7,307902,1404.02,1389.08
+Remote Australia,Occupational Therapists,211,187,34.7,33.7,307902,68.53,60.73
+Remote Australia,Optometrists,37,37,38.2,38.0,307902,12.02,12.02
+Remote Australia,Osteopaths,,3,39.0,33.3,307902,,0.97
+Remote Australia,Pharmacists,232,236,40.8,38.6,307902,75.35,76.65
+Remote Australia,Physiotherapists,247,232,36.5,35.8,307902,80.22,75.35
+Remote Australia,Podiatrists,41,40,36.4,37.0,307902,13.32,12.99
+Remote Australia,Paramedicine Practitioners,395,570,39.7,54.8,307902,128.29,185.12
+Remote Australia,Psychologists,149,131,45.1,33.3,307902,48.39,42.55
+Remote Australia,Total,6925,7043,42.7,39.0,307902,2249.09,2287.42
+Very Remote,ATSI Health Practitioners,110,123,46.9,42.5,200245,54.93,61.42
+Very Remote,Chiropractors,14,11,39.8,29.3,200245,6.99,5.49
+Very Remote,Chinese Medicine Practitioners,,,41.0,20.0,200245,,
+Very Remote,Dental Practitioners,32,30,47.3,36.2,200245,15.98,14.98
+Very Remote,Medical Practitioners,499,539,47.9,43.2,200245,249.19,269.17
+Very Remote,Medical Radiation Practitioners,40,44,45.6,42.2,200245,19.98,21.97
+Very Remote,Nurses and Midwives,2640,2930,45.6,42.3,200245,1318.38,1463.21
+Very Remote,Occupational Therapists,71,65,34.5,34.6,200245,35.46,32.46
+Very Remote,Optometrists,,12,51.8,39.7,200245,,5.99
+Very Remote,Osteopaths,,,40.0,30.0,200245,,
+Very Remote,Pharmacists,99,105,43.3,40.3,200245,49.44,52.44
+Very Remote,Physiotherapists,106,121,35.6,43.3,200245,52.94,60.43
+Very Remote,Podiatrists,,13,36.8,38.9,200245,,6.49
+Very Remote,Paramedicine Practitioners,298,458,42.8,58.4,200245,148.82,228.72
+Very Remote,Psychologists,56,56,50.1,37.9,200245,27.97,27.97
+Very Remote,Total,3992,4509,45.2,43.3,200245,1993.56,2251.74

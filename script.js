@@ -1,5 +1,3 @@
-
-
 const charts = [
   {
     id: "chart1",
@@ -38,22 +36,39 @@ const specs = {};
 let resizeTimer;
 
 
-
-
+// Load each chart independently
 async function loadSpecs() {
 
   await Promise.all(
     charts.map(async ({ id, path }) => {
 
-      const response = await fetch(path);
+      try {
 
-      if (!response.ok) {
-        throw new Error(
-          `Could not load ${path}: ${response.status}`
+        const response = await fetch(path);
+
+        if (!response.ok) {
+          throw new Error(
+            `Could not load ${path}: ${response.status}`
+          );
+        }
+
+        specs[id] = await response.json();
+
+      } catch (error) {
+
+        console.error(
+          `Failed to load ${id} from ${path}:`,
+          error
         );
-      }
 
-      specs[id] = await response.json();
+        const element = document.getElementById(id);
+
+        if (element) {
+          element.textContent =
+            "Chart could not load. Check the browser console.";
+        }
+
+      }
 
     })
   );
@@ -61,7 +76,7 @@ async function loadSpecs() {
 }
 
 
-
+// Render all successfully loaded charts
 async function renderCharts() {
 
   for (const { id, axisAllowance } of charts) {
@@ -72,19 +87,15 @@ async function renderCharts() {
       continue;
     }
 
-
     const availableWidth = element.clientWidth;
-
 
     const plotWidth = Math.max(
       120,
       Math.floor(availableWidth - axisAllowance)
     );
 
-
     const spec = structuredClone(specs[id]);
 
-   
     if (id === "chart2") {
 
       spec.vconcat.forEach(panel => {
@@ -97,7 +108,6 @@ async function renderCharts() {
 
     }
 
-
     try {
 
       await vegaEmbed(`#${id}`, spec, {
@@ -108,7 +118,7 @@ async function renderCharts() {
     } catch (error) {
 
       console.error(
-        `Failed to render ${id}`,
+        `Failed to render ${id}:`,
         error
       );
 
@@ -122,8 +132,7 @@ async function renderCharts() {
 }
 
 
-
-
+// Initialise charts
 async function initialise() {
 
   try {
@@ -132,7 +141,6 @@ async function initialise() {
 
     await renderCharts();
 
-    
     window.addEventListener("resize", () => {
 
       clearTimeout(resizeTimer);

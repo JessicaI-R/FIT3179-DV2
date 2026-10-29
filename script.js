@@ -28,6 +28,11 @@ const charts = [
     id: "chart5",
     path: "js/workforce_average_age.vl.json",
     axisAllowance: 260
+  },
+  {
+    id: "chart6",
+    path: "js/workforce_density_map.vg.json",
+    axisAllowance: 100
   }
 ];
 

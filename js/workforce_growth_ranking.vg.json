@@ -1,16 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": {
-    "text": "Which Healthcare Professions Grew the Fastest?",
-    "subtitle": "Percentage change in registered practitioners, 2020–2024",
-    "anchor": "start",
-    "fontSize": 17,
-    "subtitleFontSize": 12
-  },
-
-  "width": 550,
-  "height": 430,
+  "width": 300,
+  "height": 470,
 
   "data": {
     "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
@@ -32,18 +24,25 @@
       "groupby": ["Profession"]
     },
     {
+      "filter": "isValid(datum['2020']) && datum['2020'] > 0 && isValid(datum['2024'])"
+    },
+    {
       "calculate": "((datum['2024'] - datum['2020']) / datum['2020']) * 100",
       "as": "Growth"
     },
     {
       "calculate": "format(datum.Growth, '.1f') + '%'",
       "as": "GrowthLabel"
+    },
+    {
+      "calculate": "replace(replace(replace(replace(datum.Profession, 'Medical Radiation Practitioners', 'Medical Radiation'), 'Chinese Medicine Practitioners', 'Chinese Medicine'), 'Paramedicine Practitioners', 'Paramedics'), 'Nurses and Midwives', 'Nurses & Midwives')",
+      "as": "ShortProfession"
     }
   ],
 
   "encoding": {
     "y": {
-      "field": "Profession",
+      "field": "ShortProfession",
       "type": "nominal",
       "sort": {
         "field": "Growth",
@@ -51,8 +50,8 @@
       },
       "title": null,
       "axis": {
-        "labelFontSize": 12,
-        "labelLimit": 220,
+        "labelFontSize": 10,
+        "labelLimit": 165,
         "ticks": false,
         "domain": false
       }
@@ -63,11 +62,12 @@
       "type": "quantitative",
       "title": "Workforce growth (%)",
       "scale": {
-        "domain": [0, 40]
+        "zero": true,
+        "nice": true
       },
       "axis": {
-        "labelFontSize": 12,
-        "titleFontSize": 13,
+        "labelFontSize": 11,
+        "titleFontSize": 11,
         "grid": true,
         "gridColor": "#e5e9eb",
         "tickCount": 5
@@ -118,7 +118,7 @@
     {
       "mark": {
         "type": "circle",
-        "size": 130
+        "size": 105
       },
       "encoding": {
         "color": {
@@ -135,8 +135,8 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "dx": 10,
-        "fontSize": 12,
+        "dx": 7,
+        "fontSize": 10,
         "fontWeight": "bold",
         "color": "#233646"
       },

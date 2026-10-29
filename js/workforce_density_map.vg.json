@@ -1,0 +1,234 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Australian healthcare workforce density by state and territory, 2024",
+  "width": 650,
+  "height": 400,
+  "padding": {
+    "top": 55,
+    "left": 20,
+    "right": 20,
+    "bottom": 65
+  },
+  "autosize": "pad",
+  "background": "white",
+
+  "title": {
+    "text": "Where Are Australia's Healthcare Workers?",
+    "subtitle": "Registered healthcare practitioners per 100,000 residents, 2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 15
+  },
+
+  "signals": [
+    {
+      "name": "hoveredState",
+      "value": null,
+      "on": [
+        {
+          "events": "@stateShapes:mouseover",
+          "update": "datum.properties.state_name"
+        },
+        {
+          "events": "@stateShapes:mouseout",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+
+  "data": [
+    {
+      "name": "rates",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_state_rates_2024.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "headcount": "number",
+          "headcount_per_100k": "number",
+          "population_2024": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.profession === 'Total'"
+        }
+      ]
+    },
+    {
+      "name": "states",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/australia_states_2026_simplified.geojson",
+      "format": {
+        "type": "json",
+        "property": "features"
+      },
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "rates",
+          "key": "geography",
+          "fields": ["properties.state_name"],
+          "values": [
+            "headcount",
+            "headcount_per_100k",
+            "population_2024"
+          ],
+          "as": [
+            "headcount",
+            "density",
+            "population"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "labels",
+      "values": [
+        {"abbr": "WA", "lon": 121.5, "lat": -26},
+        {"abbr": "NT", "lon": 133.5, "lat": -19},
+        {"abbr": "QLD", "lon": 145, "lat": -22},
+        {"abbr": "SA", "lon": 135.5, "lat": -30},
+        {"abbr": "NSW", "lon": 147, "lat": -32},
+        {"abbr": "VIC", "lon": 144.5, "lat": -37},
+        {"abbr": "TAS", "lon": 146.5, "lat": -42}
+      ],
+      "transform": [
+        {
+          "type": "geopoint",
+          "projection": "australia",
+          "fields": ["lon", "lat"],
+          "as": ["x", "y"]
+        }
+      ]
+    }
+  ],
+
+  "projections": [
+    {
+      "name": "australia",
+      "type": "identity",
+      "reflectY": true,
+      "fit": {
+        "signal": "data('states')"
+      },
+      "size": {
+        "signal": "[width, height]"
+      }
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "colour",
+      "type": "linear",
+      "domain": [2500, 3200],
+      "range": ["#b8dddd", "#086b70"],
+      "clamp": true,
+      "zero": false
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "shape",
+      "name": "stateShapes",
+      "from": {
+        "data": "states"
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "australia"
+        }
+      ],
+      "encode": {
+        "enter": {
+          "tooltip": {
+            "signal": "{'State / Territory': datum.properties.state_name, 'Practitioners per 100,000': format(datum.density, ',.1f'), 'Registered practitioners': format(datum.headcount, ',.0f'), 'Population (2024)': format(datum.population, ',.0f')}"
+          }
+        },
+        "update": {
+          "fill": {
+            "scale": "colour",
+            "field": "density"
+          },
+          "stroke": {
+            "signal": "hoveredState === datum.properties.state_name ? '#253746' : '#ffffff'"
+          },
+          "strokeWidth": {
+            "signal": "hoveredState === datum.properties.state_name ? 2 : 1.2"
+          },
+          "opacity": {
+            "signal": "hoveredState === null || hoveredState === datum.properties.state_name ? 1 : 0.75"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "stateLabels",
+      "interactive": false,
+      "from": {
+        "data": "labels"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "text": {
+            "field": "abbr"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "stroke": {
+            "value": "#17383e"
+          },
+          "strokeWidth": {
+            "value": 0.3
+          }
+        }
+      }
+    }
+  ],
+
+  "legends": [
+    {
+      "fill": "colour",
+      "title": "Practitioners per 100,000",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "gradientLength": 280,
+      "gradientThickness": 12,
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "format": ",.0f",
+      "values": [2500, 2700, 2900, 3100],
+      "offset": 20
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

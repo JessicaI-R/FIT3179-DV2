@@ -1,19 +1,143 @@
-const chart1 = "js/workforce_growth.vg.json";
-
-vegaEmbed("#chart1", chart1, {
-  actions: false
-}).catch(console.error);
 
 
-const chart2 = "js/workforce_profession_slopegraph.vg.json";
+const charts = [
+  {
+    id: "chart1",
+    path: "js/workforce_growth.vg.json",
+    axisAllowance: 90
+  },
+  {
+    id: "chart2",
+    path: "js/workforce_profession_slopegraph.vg.json",
+    axisAllowance: 100
+  },
+  {
+    id: "chart3",
+    path: "js/workforce_growth_ranking.vg.json",
+    axisAllowance: 190
+  }
+];
 
-vegaEmbed("#chart2", chart2, {
-  actions: false
-}).catch(console.error);
+const specs = {};
+
+let resizeTimer;
 
 
-const chart3 = "js/workforce_growth_ranking.vg.json";
 
-vegaEmbed("#chart3", chart3, {
-  actions: false
-}).catch(console.error);
+
+async function loadSpecs() {
+
+  await Promise.all(
+    charts.map(async ({ id, path }) => {
+
+      const response = await fetch(path);
+
+      if (!response.ok) {
+        throw new Error(
+          `Could not load ${path}: ${response.status}`
+        );
+      }
+
+      specs[id] = await response.json();
+
+    })
+  );
+
+}
+
+
+
+async function renderCharts() {
+
+  for (const { id, axisAllowance } of charts) {
+
+    const element = document.getElementById(id);
+
+    if (!element || !specs[id]) {
+      continue;
+    }
+
+
+    const availableWidth = element.clientWidth;
+
+
+    const plotWidth = Math.max(
+      120,
+      Math.floor(availableWidth - axisAllowance)
+    );
+
+
+    const spec = structuredClone(specs[id]);
+
+   
+    if (id === "chart2") {
+
+      spec.vconcat.forEach(panel => {
+        panel.width = plotWidth;
+      });
+
+    } else {
+
+      spec.width = plotWidth;
+
+    }
+
+
+    try {
+
+      await vegaEmbed(`#${id}`, spec, {
+        actions: false,
+        renderer: "svg"
+      });
+
+    } catch (error) {
+
+      console.error(
+        `Failed to render ${id}`,
+        error
+      );
+
+      element.textContent =
+        "Chart could not load. Check the browser console.";
+
+    }
+
+  }
+
+}
+
+
+
+
+async function initialise() {
+
+  try {
+
+    await loadSpecs();
+
+    await renderCharts();
+
+    
+    window.addEventListener("resize", () => {
+
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(
+        renderCharts,
+        250
+      );
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Could not initialise charts:",
+      error
+    );
+
+  }
+
+}
+
+initialise();

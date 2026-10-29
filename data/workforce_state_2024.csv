@@ -1,0 +1,129 @@
+state,profession,headcount,fte,average_age,average_weekly_hours
+New South Wales,ATSI Health Practitioners,203,199,42.2,37.3
+New South Wales,Chiropractors,1966,1738,41.8,33.6
+New South Wales,Chinese Medicine Practitioners,1628,1227,53.9,28.6
+New South Wales,Dental Practitioners,7388,6790,43.4,34.9
+New South Wales,Medical Practitioners,36640,37233,46.2,40.6
+New South Wales,Medical Radiation Practitioners,5968,5431,38.4,34.6
+New South Wales,Nurses and Midwives,110055,102774,42.4,35.6
+New South Wales,Occupational Therapists,7992,7102,37.2,33.8
+New South Wales,Optometrists,2052,1822,41.2,33.7
+New South Wales,Osteopaths,614,516,46.2,31.9
+New South Wales,Pharmacists,8914,8050,41.4,34.3
+New South Wales,Physiotherapists,11595,10684,37.9,35.0
+New South Wales,Podiatrists,1578,1504,40.3,36.2
+New South Wales,Paramedicine Practitioners,5850,6866,37.5,44.6
+New South Wales,Psychologists,11848,9872,46.2,31.7
+New South Wales,Total,214291,201809,42.6,36.2
+Victoria,ATSI Health Practitioners,39,38,40.7,37.2
+Victoria,Chiropractors,1444,1170,42.5,30.8
+Victoria,Chinese Medicine Practitioners,1192,902,49.8,28.7
+Victoria,Dental Practitioners,6105,5497,41.7,34.2
+Victoria,Medical Practitioners,31508,31134,44.9,39.5
+Victoria,Medical Radiation Practitioners,4300,4190,37.8,37.0
+Victoria,Nurses and Midwives,111930,99284,41.5,33.8
+Victoria,Occupational Therapists,7614,6784,36.2,33.9
+Victoria,Optometrists,1779,1544,39.0,33.0
+Victoria,Osteopaths,1984,1665,35.4,31.9
+Victoria,Pharmacists,8400,7751,39.6,35.1
+Victoria,Physiotherapists,9686,8888,37.7,34.9
+Victoria,Podiatrists,1672,1546,39.0,35.1
+Victoria,Paramedicine Practitioners,5575,6336,37.1,43.2
+Victoria,Psychologists,10434,8621,45.5,31.4
+Victoria,Total,203662,185348,41.5,34.9
+Queensland,ATSI Health Practitioners,140,154,48.5,41.9
+Queensland,Chiropractors,1000,859,44.3,32.6
+Queensland,Chinese Medicine Practitioners,774,601,51.7,29.5
+Queensland,Dental Practitioners,5128,4696,41.6,34.8
+Queensland,Medical Practitioners,25515,25837,44.8,40.5
+Queensland,Medical Radiation Practitioners,3789,3693,38.7,37.0
+Queensland,Nurses and Midwives,88560,80590,42.4,34.7
+Queensland,Occupational Therapists,6037,5420,36.6,34.1
+Queensland,Optometrists,1345,1214,39.8,34.3
+Queensland,Osteopaths,342,301,40.9,33.4
+Queensland,Pharmacists,6328,5893,39.5,35.4
+Queensland,Physiotherapists,7824,7264,37.6,35.3
+Queensland,Podiatrists,998,989,39.6,37.7
+Queensland,Paramedicine Practitioners,5608,6659,37.7,45.1
+Queensland,Psychologists,6971,5961,45.8,32.5
+Queensland,Total,160359,150132,42.1,35.9
+South Australia,ATSI Health Practitioners,78,88,44.8,42.7
+South Australia,Chiropractors,373,299,46.6,30.5
+South Australia,Chinese Medicine Practitioners,189,140,50.1,28.2
+South Australia,Dental Practitioners,1990,1725,41.7,32.9
+South Australia,Medical Practitioners,8550,8676,45.5,40.6
+South Australia,Medical Radiation Practitioners,1410,1289,38.6,34.7
+South Australia,Nurses and Midwives,34436,30142,42.8,33.3
+South Australia,Occupational Therapists,2377,2081,36.0,33.3
+South Australia,Optometrists,456,424,35.8,35.3
+South Australia,Osteopaths,42,35,38.7,32.0
+South Australia,Pharmacists,2239,2023,40.2,34.3
+South Australia,Physiotherapists,3193,2847,38.0,33.9
+South Australia,Podiatrists,536,498,39.4,35.3
+South Australia,Paramedicine Practitioners,1518,1817,37.4,45.5
+South Australia,Psychologists,1811,1504,45.9,31.5
+South Australia,Total,59198,53588,42.3,34.7
+Western Australia,ATSI Health Practitioners,130,145,44.4,42.4
+Western Australia,Chiropractors,853,674,37.7,30.0
+Western Australia,Chinese Medicine Practitioners,230,181,52.0,29.9
+Western Australia,Dental Practitioners,2897,2513,42.3,33.0
+Western Australia,Medical Practitioners,13055,12918,44.6,39.6
+Western Australia,Medical Radiation Practitioners,1612,1523,39.2,35.9
+Western Australia,Nurses and Midwives,42650,39113,42.5,34.9
+Western Australia,Occupational Therapists,4003,3447,36.3,32.7
+Western Australia,Optometrists,594,550,40.5,35.2
+Western Australia,Osteopaths,76,67,44.1,33.3
+Western Australia,Pharmacists,3595,3255,40.1,34.4
+Western Australia,Physiotherapists,4593,4048,37.4,33.5
+Western Australia,Podiatrists,541,483,41.0,33.9
+Western Australia,Paramedicine Practitioners,1801,2336,39.0,49.3
+Western Australia,Psychologists,3972,3266,46.0,31.2
+Western Australia,Total,80602,74518,42.1,35.5
+Tasmania,ATSI Health Practitioners,,,42.8,36.8
+Tasmania,Chiropractors,71,61,44.1,32.6
+Tasmania,Chinese Medicine Practitioners,43,32,49.7,28.7
+Tasmania,Dental Practitioners,421,389,42.6,35.1
+Tasmania,Medical Practitioners,2906,2902,45.0,39.9
+Tasmania,Medical Radiation Practitioners,353,338,38.0,36.4
+Tasmania,Nurses and Midwives,10196,9298,43.1,34.7
+Tasmania,Occupational Therapists,393,341,42.1,32.9
+Tasmania,Optometrists,124,112,41.9,34.4
+Tasmania,Osteopaths,52,39,45.4,28.8
+Tasmania,Pharmacists,750,687,39.9,34.8
+Tasmania,Physiotherapists,670,572,39.5,32.4
+Tasmania,Podiatrists,112,108,42.0,36.8
+Tasmania,Paramedicine Practitioners,604,696,38.6,43.8
+Tasmania,Psychologists,653,541,45.9,31.5
+Tasmania,Total,17353,16123,43.0,35.7
+Australian Capital Territory,ATSI Health Practitioners,,,,
+Australian Capital Territory,Chiropractors,57,51,46.5,34.0
+Australian Capital Territory,Chinese Medicine Practitioners,56,42,54.3,28.4
+Australian Capital Territory,Dental Practitioners,428,398,43.1,35.4
+Australian Capital Territory,Medical Practitioners,2389,2448,45.4,41.0
+Australian Capital Territory,Medical Radiation Practitioners,342,349,36.5,38.7
+Australian Capital Territory,Nurses and Midwives,7225,6853,40.1,36.2
+Australian Capital Territory,Occupational Therapists,460,420,38.0,34.7
+Australian Capital Territory,Optometrists,126,116,37.9,34.9
+Australian Capital Territory,Osteopaths,41,36,43.4,33.1
+Australian Capital Territory,Pharmacists,640,599,40.1,35.6
+Australian Capital Territory,Physiotherapists,841,777,37.0,35.1
+Australian Capital Territory,Podiatrists,76,74,38.8,37.1
+Australian Capital Territory,Paramedicine Practitioners,297,354,36.9,45.3
+Australian Capital Territory,Psychologists,952,818,45.3,32.7
+Australian Capital Territory,Total,13930,13335,41.1,36.8
+Northern Territory,ATSI Health Practitioners,145,153,46.7,40.2
+Northern Territory,Chiropractors,25,21,39.9,32.1
+Northern Territory,Chinese Medicine Practitioners,11,8,53.4,27.8
+Northern Territory,Dental Practitioners,132,126,41.7,36.2
+Northern Territory,Medical Practitioners,1312,1362,42.4,41.5
+Northern Territory,Medical Radiation Practitioners,128,120,37.4,35.5
+Northern Territory,Nurses and Midwives,4217,4244,42.1,38.3
+Northern Territory,Occupational Therapists,217,206,36.4,36.1
+Northern Territory,Optometrists,38,37,40.0,36.6
+Northern Territory,Osteopaths,,,39.0,37.2
+Northern Territory,Pharmacists,199,194,38.9,37.1
+Northern Territory,Physiotherapists,244,229,36.2,35.6
+Northern Territory,Podiatrists,28,29,37.4,38.9
+Northern Territory,Paramedicine Practitioners,219,283,36.0,49.1
+Northern Territory,Psychologists,199,182,46.3,34.7
+Northern Territory,Total,7119,7198,41.6,38.8

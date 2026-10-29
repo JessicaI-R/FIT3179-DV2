@@ -48,6 +48,11 @@ const charts = [
     id: "chart9",
     path: "js/public_hospitals_map.vg.json",
     axisAllowance: 100
+  },
+  {
+    id: "chart10",
+    path: "js/workforce_remoteness_density.vl.json",
+    axisAllowance: 190
   }
 ];
 

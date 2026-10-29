@@ -1,0 +1,207 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Healthcare workforce density across Australia's remoteness areas in 2024.",
+  "title": {
+    "text": "Does Healthcare Workforce Availability Decline with Remoteness?",
+    "subtitle": "Registered healthcare practitioners per 100,000 residents, 2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 18
+  },
+  "width": 550,
+  "height": 310,
+  "background": "white",
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_remoteness_rates_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "headcount": "number",
+        "fte": "number",
+        "population_2024": "number",
+        "headcount_per_100k": "number",
+        "fte_per_100k": "number"
+      }
+    }
+  },
+
+  "params": [
+    {
+      "name": "measure",
+      "value": "Headcount",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Headcount",
+          "FTE"
+        ],
+        "labels": [
+          "Practitioners per 100,000",
+          "FTE per 100,000"
+        ],
+        "name": "Compare by: "
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "filter": "datum.profession === 'Total'"
+    },
+    {
+      "calculate": "measure === 'Headcount' ? datum.headcount_per_100k : datum.fte_per_100k",
+      "as": "selectedRate"
+    },
+    {
+      "calculate": "datum.geography === 'Major Cities' ? 1 : datum.geography === 'Inner Regional' ? 2 : datum.geography === 'Outer Regional' ? 3 : datum.geography === 'Remote Australia' ? 4 : 5",
+      "as": "remotenessOrder"
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5,
+        "height": 32
+      },
+      "encoding": {
+        "y": {
+          "field": "geography",
+          "type": "ordinal",
+          "sort": [
+            "Major Cities",
+            "Inner Regional",
+            "Outer Regional",
+            "Remote Australia",
+            "Very Remote"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 12,
+            "labelPadding": 10,
+            "labelLimit": 160,
+            "ticks": false,
+            "domain": false
+          }
+        },
+        "x": {
+          "field": "selectedRate",
+          "type": "quantitative",
+          "title": "Practitioners / FTE per 100,000 residents",
+          "scale": {
+            "domain": [0, 3300]
+          },
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "format": ",.0f",
+            "tickCount": 5,
+            "grid": true,
+            "gridColor": "#e8edef"
+          }
+        },
+        "color": {
+          "field": "geography",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Major Cities",
+              "Inner Regional",
+              "Outer Regional",
+              "Remote Australia",
+              "Very Remote"
+            ],
+            "range": [
+              "#247b85",
+              "#4d98a0",
+              "#78aeb0",
+              "#e49b59",
+              "#c96d4a"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "geography",
+            "type": "nominal",
+            "title": "Remoteness area"
+          },
+          {
+            "field": "headcount_per_100k",
+            "type": "quantitative",
+            "title": "Practitioners per 100,000",
+            "format": ",.1f"
+          },
+          {
+            "field": "fte_per_100k",
+            "type": "quantitative",
+            "title": "FTE per 100,000",
+            "format": ",.1f"
+          },
+          {
+            "field": "headcount",
+            "type": "quantitative",
+            "title": "Registered practitioners",
+            "format": ",.0f"
+          },
+          {
+            "field": "population_2024",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263b45"
+      },
+      "encoding": {
+        "y": {
+          "field": "geography",
+          "type": "ordinal",
+          "sort": [
+            "Major Cities",
+            "Inner Regional",
+            "Outer Regional",
+            "Remote Australia",
+            "Very Remote"
+          ]
+        },
+        "x": {
+          "field": "selectedRate",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 3300]
+          }
+        },
+        "text": {
+          "field": "selectedRate",
+          "type": "quantitative",
+          "format": ",.0f"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false
+    },
+    "font": "Arial"
+  }
+}

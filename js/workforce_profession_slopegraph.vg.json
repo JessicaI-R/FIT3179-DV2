@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "title": {
     "text": "Healthcare Workforce Growth by Profession",
     "subtitle": "Registered practitioners employed in Australia, 2020 vs 2024",
@@ -7,12 +8,14 @@
     "fontSize": 17,
     "subtitleFontSize": 12
   },
+
   "data": {
     "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
     "format": {
       "type": "csv"
     }
   },
+
   "transform": [
     {
       "filter": "datum.Year == 2020 || datum.Year == 2024"
@@ -33,6 +36,7 @@
       }
     }
   ],
+
   "vconcat": [
     {
       "title": {
@@ -40,8 +44,10 @@
         "anchor": "start",
         "fontSize": 13
       },
-      "width": 550,
+
+      "width": 650,
       "height": 170,
+
       "transform": [
         {
           "filter": {
@@ -53,6 +59,7 @@
           }
         }
       ],
+
       "mark": {
         "type": "line",
         "strokeWidth": 3,
@@ -61,6 +68,7 @@
           "size": 90
         }
       },
+
       "encoding": {
         "x": {
           "field": "Year",
@@ -79,6 +87,7 @@
             "domain": false
           }
         },
+
         "y": {
           "field": "Headcount",
           "type": "quantitative",
@@ -92,6 +101,7 @@
             "tickCount": 4
           }
         },
+
         "color": {
           "field": "Profession",
           "type": "nominal",
@@ -109,12 +119,15 @@
             "title": null,
             "orient": "bottom",
             "columns": 2,
-            "labelFontSize": 12
+            "labelFontSize": 11,
+            "symbolSize": 100
           }
         },
+
         "detail": {
           "field": "Profession"
         },
+
         "tooltip": [
           {
             "field": "Profession",
@@ -132,14 +145,17 @@
         ]
       }
     },
+
     {
       "title": {
         "text": "Other selected professions",
         "anchor": "start",
         "fontSize": 13
       },
-      "width": 550,
+
+      "width": 650,
       "height": 230,
+
       "transform": [
         {
           "filter": {
@@ -155,6 +171,7 @@
           }
         }
       ],
+
       "mark": {
         "type": "line",
         "strokeWidth": 3,
@@ -163,6 +180,7 @@
           "size": 90
         }
       },
+
       "encoding": {
         "x": {
           "field": "Year",
@@ -181,6 +199,7 @@
             "domain": false
           }
         },
+
         "y": {
           "field": "Headcount",
           "type": "quantitative",
@@ -194,6 +213,7 @@
             "tickCount": 5
           }
         },
+
         "color": {
           "field": "Profession",
           "type": "nominal",
@@ -218,13 +238,16 @@
           "legend": {
             "title": null,
             "orient": "bottom",
-            "columns": 3,
-            "labelFontSize": 11
+            "columns": 2,
+            "labelFontSize": 11,
+            "symbolSize": 100
           }
         },
+
         "detail": {
           "field": "Profession"
         },
+
         "tooltip": [
           {
             "field": "Profession",
@@ -243,6 +266,7 @@
       }
     }
   ],
+
   "resolve": {
     "scale": {
       "y": "independent",
@@ -252,8 +276,10 @@
       "color": "independent"
     }
   },
+
   "config": {
     "view": {
+      "continuousWidth": 650,
       "stroke": null
     },
     "axis": {

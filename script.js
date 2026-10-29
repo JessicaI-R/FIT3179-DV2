@@ -53,6 +53,11 @@ const charts = [
     id: "chart10",
     path: "js/workforce_remoteness_density.vl.json",
     axisAllowance: 190
+  },
+  {
+    id: "chart11",
+    path: "js/workforce_remoteness_hours.vl.json",
+    axisAllowance: 260
   }
 ];
 

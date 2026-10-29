@@ -1,0 +1,201 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How Have Healthcare Profession Rankings Changed?",
+    "subtitle": "Ranked by practitioner headcount, 2020–2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12
+  },
+  "width": 650,
+  "height": 460,
+  "data": {
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.Profession !== 'Total'"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "Rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Headcount",
+          "order": "descending"
+        }
+      ],
+      "groupby": ["Year"]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "min",
+          "field": "Rank",
+          "as": "MinRank"
+        },
+        {
+          "op": "max",
+          "field": "Rank",
+          "as": "MaxRank"
+        }
+      ],
+      "groupby": ["Profession"]
+    },
+    {
+      "calculate": "datum.MinRank != datum.MaxRank",
+      "as": "ChangedRank"
+    },
+    {
+      "calculate": "replace(replace(replace(replace(replace(datum.Profession, 'Medical Radiation Practitioners', 'Medical Radiation'), 'Chinese Medicine Practitioners', 'Chinese Medicine'), 'Paramedicine Practitioners', 'Paramedics'), 'Nurses and Midwives', 'Nurses & Midwives'), 'ATSI Health Practitioners', 'ATSI Health')",
+      "as": "ShortProfession"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "sort": "ascending",
+      "scale": {
+        "paddingInner": 0.2,
+        "paddingOuter": 0.25
+      },
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "labelFontWeight": "bold",
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "Rank",
+      "type": "quantitative",
+      "scale": {
+        "domain": [15.5, 0.5],
+        "nice": false
+      },
+      "axis": {
+        "title": "Profession rank (1 = largest)",
+        "values": [1, 3, 5, 7, 9, 11, 13, 15],
+        "grid": true,
+        "gridColor": "#e5e9eb"
+      }
+    },
+    "detail": {
+      "field": "Profession"
+    },
+    "color": {
+      "condition": [
+        {
+          "param": "hover",
+          "empty": false,
+          "value": "#174f59"
+        },
+        {
+          "test": "datum.ChangedRank",
+          "value": "#d78347"
+        }
+      ],
+      "value": "#c9d1d4"
+    },
+    "opacity": {
+      "condition": [
+        {
+          "param": "hover",
+          "empty": false,
+          "value": 1
+        },
+        {
+          "test": "datum.ChangedRank",
+          "value": 0.9
+        }
+      ],
+      "value": 0.55
+    },
+    "tooltip": [
+      {
+        "field": "Profession",
+        "type": "nominal",
+        "title": "Profession"
+      },
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "Rank",
+        "type": "quantitative",
+        "title": "Rank",
+        "format": ".0f"
+      },
+      {
+        "field": "Headcount",
+        "type": "quantitative",
+        "title": "Practitioners",
+        "format": ","
+      }
+    ]
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["Profession"],
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 70
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Year == 2024"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "fontSize": 11
+      },
+      "encoding": {
+        "text": {
+          "field": "ShortProfession",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    }
+  }
+}

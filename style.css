@@ -211,3 +211,8 @@ footer {
   }
 
 }
+
+
+.chart-grid {
+  align-items: stretch;
+}

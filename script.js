@@ -15,6 +15,11 @@ const charts = [
     id: "chart3",
     path: "js/workforce_growth_ranking.vg.json",
     axisAllowance: 190
+  },
+  {
+    id: "chart13",
+    path: "js/workforce_rankings.vg.json",
+    axisAllowance: 100
   }
 ];
 

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How Old Is Australia's Healthcare Workforce?",
+    "subtitle": "Average age of registered practitioners by profession, 2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12
+  },
+  "width": 620,
+  "height": 470,
+  "data": {
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_average_age_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "AverageAge": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.Profession !== 'Total' && datum.Profession !== 'Overall'"
+    },
+    {
+      "calculate": "datum.Profession === 'Nurses and Midwives' ? 'Nursing & Midwifery' : datum.Profession === 'Medical Practitioners' ? 'Medical' : test(/dental/i, datum.Profession) ? 'Dental' : test(/physio|psycholog|occupational|speech|podiatr|optometr|chiropract|osteopath|medical radiation/i, datum.Profession) ? 'Allied Health' : 'Other Registered Professions'",
+      "as": "Group"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#d78347",
+        "strokeDash": [6, 4],
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "datum": 42.1,
+          "type": "quantitative",
+          "scale": {
+            "domain": [30, 57],
+            "nice": false
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 135,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "Profession",
+          "type": "nominal",
+          "sort": {
+            "field": "AverageAge",
+            "op": "mean",
+            "order": "ascending"
+          },
+          "axis": {
+            "title": null,
+            "labelFontSize": 11,
+            "labelLimit": 230
+          }
+        },
+        "x": {
+          "field": "AverageAge",
+          "type": "quantitative",
+          "scale": {
+            "domain": [30, 57],
+            "nice": false
+          },
+          "axis": {
+            "title": "Average age (years)",
+            "grid": true,
+            "gridColor": "#e5e9eb"
+          }
+        },
+        "color": {
+          "field": "Group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Nursing & Midwifery",
+              "Medical",
+              "Allied Health",
+              "Dental",
+              "Other Registered Professions"
+            ],
+            "range": [
+              "#247b85",
+              "#e49b59",
+              "#78a99b",
+              "#9a77b7",
+              "#6698bd"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "columns": 3,
+            "labelFontSize": 11
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Profession",
+            "type": "nominal",
+            "title": "Profession"
+          },
+          {
+            "field": "AverageAge",
+            "type": "quantitative",
+            "title": "Average age (years)",
+            "format": ".1f"
+          },
+          {
+            "field": "Group",
+            "type": "nominal",
+            "title": "Profession group"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "fontSize": 11,
+        "color": "#344054"
+      },
+      "encoding": {
+        "y": {
+          "field": "Profession",
+          "type": "nominal",
+          "sort": {
+            "field": "AverageAge",
+            "op": "mean",
+            "order": "ascending"
+          }
+        },
+        "x": {
+          "field": "AverageAge",
+          "type": "quantitative",
+          "scale": {
+            "domain": [30, 57],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "AverageAge",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "AverageAge": 42.1,
+            "Label": "Overall average: 42.1 years"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 7,
+        "dy": -5,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#d78347"
+      },
+      "encoding": {
+        "x": {
+          "field": "AverageAge",
+          "type": "quantitative",
+          "scale": {
+            "domain": [30, 57],
+            "nice": false
+          }
+        },
+        "y": {
+          "value": 0
+        },
+        "text": {
+          "field": "Label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

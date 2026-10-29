@@ -168,3 +168,26 @@ footer {
   line-height: 1.5;
 }
 
+/* Keep Vega-Lite charts inside their cards */
+.chart-card {
+  min-width: 0;
+}
+
+.vega-chart {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+
+
+.vega-chart .vega-embed {
+  width: 100%;
+}
+
+.vega-chart canvas,
+.vega-chart svg {
+  max-width: 100%;
+  height: auto;
+}
+

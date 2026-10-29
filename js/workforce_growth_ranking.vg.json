@@ -1,0 +1,161 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Which Healthcare Professions Grew the Fastest?",
+    "subtitle": "Percentage change in registered practitioners, 2020–2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12
+  },
+
+  "width": 550,
+  "height": 430,
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "filter": "datum.Year == 2020 || datum.Year == 2024"
+    },
+    {
+      "filter": "datum.Profession !== 'Total'"
+    },
+    {
+      "pivot": "Year",
+      "value": "Headcount",
+      "groupby": ["Profession"]
+    },
+    {
+      "calculate": "((datum['2024'] - datum['2020']) / datum['2020']) * 100",
+      "as": "Growth"
+    },
+    {
+      "calculate": "format(datum.Growth, '.1f') + '%'",
+      "as": "GrowthLabel"
+    }
+  ],
+
+  "encoding": {
+    "y": {
+      "field": "Profession",
+      "type": "nominal",
+      "sort": {
+        "field": "Growth",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 220,
+        "ticks": false,
+        "domain": false
+      }
+    },
+
+    "x": {
+      "field": "Growth",
+      "type": "quantitative",
+      "title": "Workforce growth (%)",
+      "scale": {
+        "domain": [0, 40]
+      },
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "grid": true,
+        "gridColor": "#e5e9eb",
+        "tickCount": 5
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Profession",
+        "type": "nominal",
+        "title": "Profession"
+      },
+      {
+        "field": "2020",
+        "type": "quantitative",
+        "title": "2020 headcount",
+        "format": ",.0f"
+      },
+      {
+        "field": "2024",
+        "type": "quantitative",
+        "title": "2024 headcount",
+        "format": ",.0f"
+      },
+      {
+        "field": "Growth",
+        "type": "quantitative",
+        "title": "Growth (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "color": "#a9c5c8"
+      },
+      "encoding": {
+        "x2": {
+          "datum": 0
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "circle",
+        "size": 130
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "datum.Growth >= 24.9",
+            "value": "#24636b"
+          },
+          "value": "#80aeb2"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#233646"
+      },
+      "encoding": {
+        "text": {
+          "field": "GrowthLabel",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Treemap of Australia's registered healthcare workforce in 2024.",
+  "width": 750,
+  "height": 500,
+  "padding": {
+    "top": 10,
+    "left": 10,
+    "right": 15,
+    "bottom": 10
+  },
+  "autosize": "pad",
+
+  "title": {
+    "text": "Who Makes Up Australia's Healthcare Workforce?",
+    "subtitle": "Registered practitioners by profession, 2024",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "offset": 15
+  },
+
+  "data": [
+    {
+      "name": "workforce",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_history_2020_2024.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Headcount": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Year === 2024 && datum.Profession !== 'Total'"
+        },
+        {
+          "type": "formula",
+          "as": "Group",
+          "expr": "datum.Profession === 'Nurses and Midwives' ? 'Nursing & Midwifery' : datum.Profession === 'Medical Practitioners' ? 'Medical' : test(/dental/i, datum.Profession) ? 'Dental' : test(/physio|psycholog|occupational|speech|podiatr|optometr|chiropract|osteopath|medical radiation/i, datum.Profession) ? 'Allied Health' : 'Other Registered Professions'"
+        },
+        {
+          "type": "formula",
+          "as": "ShortName",
+          "expr": "datum.Profession === 'Nurses and Midwives' ? 'Nurses & Midwives' : datum.Profession === 'Medical Practitioners' ? 'Medical' : datum.Profession === 'Physiotherapists' ? 'Physiotherapy' : datum.Profession === 'Psychologists' ? 'Psychology' : datum.Profession === 'Occupational Therapists' ? 'Occupational' : datum.Profession === 'Pharmacists' ? 'Pharmacy' : datum.Profession === 'Medical Radiation Practitioners' ? 'Medical Radiation' : datum.Profession === 'Paramedicine Practitioners' ? 'Paramedics' : replace(datum.Profession, ' Practitioners', '')"
+        },
+        {
+          "type": "joinaggregate",
+          "fields": ["Headcount"],
+          "ops": ["sum"],
+          "as": ["TotalHeadcount"]
+        },
+        {
+          "type": "formula",
+          "as": "Share",
+          "expr": "datum.Headcount / datum.TotalHeadcount * 100"
+        },
+        {
+          "type": "window",
+          "ops": ["row_number"],
+          "as": ["ProfessionNumber"],
+          "sort": {
+            "field": "Headcount",
+            "order": "descending"
+          }
+        },
+        {
+          "type": "formula",
+          "as": "NumberLabel",
+          "expr": "toString(datum.ProfessionNumber)"
+        }
+      ]
+    },
+
+    {
+      "name": "tree",
+      "source": "workforce",
+      "transform": [
+        {
+          "type": "nest",
+          "keys": ["Group"]
+        },
+        {
+          "type": "treemap",
+          "field": "Headcount",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "method": "squarify",
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ],
+          "paddingInner": 4,
+          "paddingOuter": 3,
+          "paddingTop": 4,
+          "as": [
+            "x0",
+            "y0",
+            "x1",
+            "y1",
+            "depth",
+            "children"
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "professions",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "!datum.children"
+        },
+        {
+          "type": "formula",
+          "as": "BoxWidth",
+          "expr": "datum.x1 - datum.x0"
+        },
+        {
+          "type": "formula",
+          "as": "BoxHeight",
+          "expr": "datum.y1 - datum.y0"
+        }
+      ]
+    },
+
+    {
+      "name": "largeLabels",
+      "source": "professions",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.BoxWidth >= 115 && datum.BoxHeight >= 55"
+        }
+      ]
+    },
+
+    {
+      "name": "mediumLabels",
+      "source": "professions",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "(datum.BoxWidth < 115 || datum.BoxHeight < 55) && datum.BoxWidth >= 55 && datum.BoxHeight >= 35"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "groupColor",
+      "type": "ordinal",
+      "domain": [
+        "Nursing & Midwifery",
+        "Medical",
+        "Allied Health",
+        "Dental",
+        "Other Registered Professions"
+      ],
+      "range": [
+        "#247b85",
+        "#e49b59",
+        "#78a99b",
+        "#9a77b7",
+        "#6698bd"
+      ]
+    }
+  ],
+
+  "legends": [
+    {
+      "fill": "groupColor",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "title": null,
+      "labelFontSize": 11,
+      "symbolType": "square",
+      "symbolSize": 120,
+      "offset": 15
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "professions"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 2
+          },
+          "cornerRadius": {
+            "value": 3
+          },
+          "tooltip": {
+            "signal": "{Profession: datum.Profession, Group: datum.Group, Practitioners: format(datum.Headcount, ','), 'Share of workforce': format(datum.Share, '.1f') + '%'}"
+          }
+        },
+        "update": {
+          "fill": {
+            "scale": "groupColor",
+            "field": "Group"
+          },
+          "fillOpacity": {
+            "value": 0.95
+          }
+        },
+        "hover": {
+          "fillOpacity": {
+            "value": 0.75
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "largeLabels"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2 - 10"
+          },
+          "text": {
+            "field": "ShortName"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "limit": {
+            "signal": "datum.BoxWidth - 14"
+          },
+          "ellipsis": {
+            "value": "…"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "largeLabels"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2 + 12"
+          },
+          "text": {
+            "signal": "format(datum.Share, '.1f') + '%'"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "fontSize": {
+            "value": 11
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "mediumLabels"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2"
+          },
+          "text": {
+            "field": "ShortName"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "limit": {
+            "signal": "datum.BoxWidth - 12"
+          },
+          "ellipsis": {
+            "value": "…"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "professions"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x0 + 7"
+          },
+          "y": {
+            "signal": "datum.y0 + 7"
+          },
+          "text": {
+            "field": "NumberLabel"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "top"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "opacity": {
+            "signal": "datum.BoxWidth >= 24 && datum.BoxHeight >= 22 ? 0.9 : 0"
+          }
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "#ffffff"
+  }
+}

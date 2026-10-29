@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Australia's Healthcare Workforce</title>
+  <title>Australia's Healthcare Workforce | FIT3179 DV2</title>
 
   <!-- Vega-Lite libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -16,171 +17,296 @@
 </head>
 
 <body>
-  <main class="page">
 
-    <header class="hero">
-      <p class="eyebrow">Australian Healthcare Workforce | 2020–2024</p>
-      <h1>Australia's Healthcare Workforce</h1>
-      <h2>Growing, but Where?</h2>
-      <p class="intro">
-        Introduction text will go here.
-      </p>
-    </header>
+<main class="page">
 
-    <!-- SECTION 1 -->
-    <section>
-      <h2>01. A Workforce on the Rise</h2>
-      <p class="section-intro">Section introduction goes here.</p>
+  <!-- INTRODUCTION -->
+  <header class="hero">
 
-      <div class="chart-grid">
-        <article class="chart-card full">
-          <h3>1. National Workforce Growth</h3>
-          <p class="chart-highlight">
-            <strong>+17.9%</strong>
-            growth in registered healthcare practitioners
-            between 2020 and 2024
-          </p>
-          <div id="chart1" class="vega-chart"></div>
-          <p>Australia's registered healthcare workforce grew from 642,479 practitioners in 2020 to 757,517 in 2024, an increase of approximately 17.9%. Despite this national growth, the figures alone do not reveal whether workforce expansion has been evenly distributed across professions or geographic areas.</p>
-          <p class="source-note">
-            Source: Australian Government, Health Workforce Data,
-            2020–2024. Registered healthcare practitioners employed in Australia.
-          </p> 
-        </article>
+    <p class="eyebrow">
+      Australian Healthcare Workforce | 2020–2024
+    </p>
 
-        <article class="chart-card full">
-          <h3>2. Growth by Profession</h3>
-          
-          <div id="chart2" class="vega-chart"></div>
-          <p class="chart-note">
-            <strong>Note:</strong> The two panels use different vertical scales
-            to make changes in smaller professions easier to see.
-            Compare growth within each panel rather than comparing
-            the steepness of lines between panels.
-          </p>
-          
-          <p class="source-note">
-            Source: Australian Government, Health Workforce Data, 2020–2024.
-          </p>
-        </article>
+    <h1>Australia's Healthcare Workforce</h1>
+    <h2>Growing, but Where?</h2>
 
-        <article class="chart-card">
-          <h3>3. Fastest-Growing Professions</h3>
-          <div id="chart3" class="vega-chart"></div>
-          <p>Occupational Therapists experienced the fastest workforce growth between 2020 and 2024, increasing by **34.2%**, followed by Physiotherapists (26.8%) and Paramedicine Practitioners (24.9%).
+    <p class="intro">
+      How has Australia's registered healthcare workforce changed,
+      and where are its practitioners located?
+    </p>
 
-While Nurses and Midwives remain the largest professional group, these results highlight how smaller healthcare professions are expanding at different rates.</p>
-        </article>
+  </header>
 
-        <article class="chart-card full">
-          <h3>13. Changes in Profession Rankings</h3>
-          <div id="chart13" class="chart-placeholder">Bump chart</div>
-          <p>Explanation goes here.</p>
-        </article>
-      </div>
-    </section>
 
-    <!-- SECTION 2 -->
-    <section>
-      <h2>02. Who Makes Up the Workforce?</h2>
-      <p class="section-intro">Section introduction goes here.</p>
+  <!-- SECTION 1 -->
+  <section>
 
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>4. Workforce Composition</h3>
-          <div id="chart4" class="chart-placeholder">Treemap</div>
-          <p>Explanation goes here.</p>
-        </article>
+    <h2>01. A Workforce on the Rise</h2>
 
-        <article class="chart-card">
-          <h3>5. Average Age by Profession</h3>
-          <div id="chart5" class="chart-placeholder">Dot plot</div>
-          <p>Explanation goes here.</p>
-        </article>
-      </div>
-    </section>
+    <p class="section-intro">
+      Australia's registered healthcare workforce has expanded,
+      but growth has not been equal across professions.
+    </p>
 
-    <!-- SECTION 3 -->
-    <section>
-      <h2>03. Where Are the Workers?</h2>
-      <p class="section-intro">Section introduction goes here.</p>
+    <div class="chart-grid">
 
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>6. Workforce Density by State</h3>
-          <div id="chart6" class="chart-placeholder">Choropleth map</div>
-          <p>Explanation goes here.</p>
-        </article>
+      <!-- CHART 1 -->
+      <article class="chart-card full">
 
-        <article class="chart-card">
-          <h3>7. Workforce Headcount by State</h3>
-          <div id="chart7" class="chart-placeholder">Proportional symbol map</div>
-          <p>Explanation goes here.</p>
-        </article>
+        <h3>1. National Workforce Growth</h3>
 
-        <article class="chart-card full">
-          <h3>8. Professions Across States</h3>
-          <div id="chart8" class="chart-placeholder">Heatmap</div>
-          <p>Explanation goes here.</p>
-        </article>
-      </div>
-    </section>
+        <p class="chart-highlight">
+          <strong>+17.9%</strong>
+          growth in registered healthcare practitioners
+          between 2020 and 2024
+        </p>
 
-    <!-- SECTION 4 -->
-    <section>
-      <h2>04. Beyond the Major Cities</h2>
-      <p class="section-intro">Section introduction goes here.</p>
+        <div id="chart1" class="vega-chart"></div>
 
-      <div class="chart-grid">
-        <article class="chart-card full">
-          <h3>9. Public Hospital Locations</h3>
-          <div id="chart9" class="chart-placeholder">Dot map</div>
-          <p>Explanation goes here.</p>
-        </article>
+        <p>
+          Australia's registered healthcare workforce grew from
+          642,479 practitioners in 2020 to 757,517 in 2024.
+          National growth alone does not show how evenly
+          practitioners are distributed across professions
+          and regions.
+        </p>
 
-        <article class="chart-card">
-          <h3>10. Workforce Density by Remoteness</h3>
-          <div id="chart10" class="chart-placeholder">Bar chart</div>
-          <p>Explanation goes here.</p>
-        </article>
+        <p class="source-note">
+          Source: Australian Government, Health Workforce Data,
+          2020–2024. The vertical axis does not begin at zero.
+        </p>
 
-        <article class="chart-card">
-          <h3>11. Working Hours by Profession and Remoteness</h3>
-          <div id="chart11" class="chart-placeholder">Heatmap</div>
-          <p>Explanation goes here.</p>
-        </article>
-      </div>
-    </section>
+      </article>
 
-    <!-- SECTION 5 -->
-    <section>
-      <h2>05. The Bigger Picture</h2>
-      <p class="section-intro">Section introduction goes here.</p>
 
-      <div class="chart-grid">
-        <article class="chart-card full">
-          <h3>12. Headcount vs Full-Time Equivalent Workforce</h3>
-          <div id="chart12" class="chart-placeholder">Dumbbell chart</div>
-          <p>Explanation goes here.</p>
-        </article>
-      </div>
-    </section>
+      <!-- CHART 2 -->
+      <article class="chart-card">
 
-    <section class="conclusion">
-      <h2>Key Takeaways</h2>
-      <p>Summary of the main findings goes here.</p>
-    </section>
+        <h3>2. Growth by Profession</h3>
 
-    <footer>
-      <h3>Data Sources & Acknowledgements</h3>
-      <p>
-        Australian Government Health Workforce Data,
-        Australian Bureau of Statistics,
-        and Australian Government public hospital data.
-      </p>
-      <p>Author: Your Name | FIT3179 Data Visualisation 2</p>
-    </footer>
+        <div id="chart2" class="vega-chart"></div>
 
-  </main>
+        <p class="chart-note">
+          <strong>Note:</strong>
+          The two panels use different vertical scales.
+          Compare changes within each panel, not the
+          steepness of lines between panels.
+        </p>
+
+        <p class="source-note">
+          Source: Australian Government,
+          Health Workforce Data, 2020 and 2024.
+        </p>
+
+      </article>
+
+
+      <!-- CHART 3 -->
+      <article class="chart-card">
+
+        <h3>3. Fastest-Growing Professions</h3>
+
+        <div id="chart3" class="vega-chart"></div>
+
+        <p>
+          Occupational Therapists experienced the fastest
+          percentage growth (34.2%), followed by
+          Physiotherapists (26.8%) and
+          Paramedicine Practitioners (24.9%).
+        </p>
+
+        <p class="source-note">
+          Source: Australian Government,
+          Health Workforce Data, 2020 and 2024.
+          Growth calculated from headcounts.
+        </p>
+
+      </article>
+
+
+      <!-- CHART 13 -->
+      <article class="chart-card full">
+
+        <h3>13. Changes in Profession Rankings</h3>
+
+        <div id="chart13" class="chart-placeholder">
+          Bump chart — coming next
+        </div>
+
+        <p>Explanation goes here.</p>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 2 -->
+  <section>
+
+    <h2>02. Who Makes Up the Workforce?</h2>
+
+    <p class="section-intro">
+      Explore workforce composition and age across professions.
+    </p>
+
+    <div class="chart-grid">
+
+      <article class="chart-card">
+        <h3>4. Workforce Composition</h3>
+        <div id="chart4" class="chart-placeholder">Treemap</div>
+        <p>Explanation goes here.</p>
+      </article>
+
+      <article class="chart-card">
+        <h3>5. Average Age by Profession</h3>
+        <div id="chart5" class="chart-placeholder">Dot plot</div>
+        <p>Explanation goes here.</p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 3 -->
+  <section>
+
+    <h2>03. Where Are the Workers?</h2>
+
+    <p class="section-intro">
+      Compare workforce distribution across Australia's
+      states and territories.
+    </p>
+
+    <div class="chart-grid">
+
+      <article class="chart-card">
+        <h3>6. Workforce Density by State</h3>
+        <div id="chart6" class="chart-placeholder">
+          Choropleth map
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+      <article class="chart-card">
+        <h3>7. Workforce Headcount by State</h3>
+        <div id="chart7" class="chart-placeholder">
+          Proportional symbol map
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+      <article class="chart-card full">
+        <h3>8. Professions Across States</h3>
+        <div id="chart8" class="chart-placeholder">
+          Heatmap
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 4 -->
+  <section>
+
+    <h2>04. Beyond the Major Cities</h2>
+
+    <p class="section-intro">
+      Explore healthcare access and workforce patterns
+      beyond metropolitan areas.
+    </p>
+
+    <div class="chart-grid">
+
+      <article class="chart-card full">
+        <h3>9. Public Hospital Locations</h3>
+        <div id="chart9" class="chart-placeholder">
+          Dot map
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+      <article class="chart-card">
+        <h3>10. Workforce Density by Remoteness</h3>
+        <div id="chart10" class="chart-placeholder">
+          Bar chart
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+      <article class="chart-card">
+        <h3>11. Working Hours by Profession and Remoteness</h3>
+        <div id="chart11" class="chart-placeholder">
+          Heatmap
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 5 -->
+  <section>
+
+    <h2>05. The Bigger Picture</h2>
+
+    <p class="section-intro">
+      Headcounts do not tell the whole story about
+      available workforce capacity.
+    </p>
+
+    <div class="chart-grid">
+
+      <article class="chart-card full">
+        <h3>12. Headcount vs Full-Time Equivalent Workforce</h3>
+        <div id="chart12" class="chart-placeholder">
+          Dumbbell chart
+        </div>
+        <p>Explanation goes here.</p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONCLUSION -->
+  <section class="conclusion">
+
+    <h2>Key Takeaways</h2>
+
+    <p>Summary of findings goes here.</p>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <h3>Data Sources & Acknowledgements</h3>
+
+    <p>
+      Australian Government Health Workforce Data;
+      Australian Bureau of Statistics;
+      Australian Government public hospital data.
+    </p>
+
+    <p>
+      FIT3179 Data Visualisation 2 —
+      Add your author details and AI acknowledgement
+      before submission.
+    </p>
+
+  </footer>
+
+</main>
+
 </body>
 </html>

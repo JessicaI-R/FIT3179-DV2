@@ -1,26 +1,30 @@
+
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #f4f7f8;
+  background: #f4f7f8;
   color: #233646;
   font-family: Arial, sans-serif;
   line-height: 1.6;
 }
 
 .page {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 30px 24px;
 }
 
-/* Title area */
+
+
+
 .hero {
   text-align: center;
   padding: 65px 20px;
-  background-color: #e4f0f1;
+  background: #e4f0f1;
   border-radius: 12px;
 }
 
@@ -47,7 +51,9 @@ h1 {
   margin: 20px auto 0;
 }
 
-/* Story sections */
+
+
+
 section {
   margin-top: 65px;
 }
@@ -62,18 +68,20 @@ section > h2 {
   margin-bottom: 25px;
 }
 
-/* Chart layout */
+
+
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  gap: 20px;
+  align-items: start;
 }
 
 .chart-card {
   background: white;
   border: 1px solid #e1e7e9;
   border-radius: 10px;
-  padding: 22px;
+  padding: 16px;
   min-width: 0;
 }
 
@@ -83,21 +91,7 @@ section > h2 {
 
 .chart-card h3 {
   font-size: 18px;
-  margin-top: 0;
-}
-
-/* Temporary placeholders */
-.chart-placeholder {
-  min-height: 250px;
-  border: 2px dashed #b4c9cd;
-  border-radius: 8px;
-  background: #f0f6f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #68848b;
-  font-size: 18px;
+  margin: 0 0 14px;
 }
 
 .chart-card p {
@@ -105,12 +99,79 @@ section > h2 {
   font-size: 14px;
 }
 
-/* Ending sections */
+
+
+
+.chart-placeholder {
+  min-height: 250px;
+  border: 2px dashed #b4c9cd;
+  border-radius: 8px;
+  background: #f0f6f7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: #68848b;
+  font-size: 18px;
+}
+
+
+
+
+.vega-chart {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 12px 0;
+}
+
+.vega-chart .vega-embed {
+  width: 100%;
+}
+
+.vega-chart svg {
+  display: block;
+  max-width: 100%;
+}
+
+
+
+
+.chart-highlight {
+  font-size: 15px !important;
+  color: #367b83 !important;
+}
+
+.chart-highlight strong {
+  font-size: 25px;
+  margin-right: 6px;
+}
+
+.chart-note {
+  font-size: 12px !important;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.source-note {
+  font-size: 12px !important;
+  color: #7b8b92 !important;
+  font-style: italic;
+}
+
+
+
+
 .conclusion {
   background: #e4f0f1;
   padding: 25px;
   border-radius: 10px;
 }
+
+
+
 
 footer {
   margin-top: 60px;
@@ -120,8 +181,11 @@ footer {
   font-size: 13px;
 }
 
-/* Smaller screens */
-@media (max-width: 700px) {
+
+
+
+@media (max-width: 850px) {
+
   .chart-grid {
     grid-template-columns: 1fr;
   }
@@ -130,64 +194,20 @@ footer {
     grid-column: auto;
   }
 
+}
+
+@media (max-width: 500px) {
+
   .page {
-    padding: 15px;
+    padding: 12px;
   }
+
+  .chart-card {
+    padding: 10px;
+  }
+
+  .hero {
+    padding: 36px 12px;
+  }
+
 }
-
-/* Vega-Lite chart containers */
-.vega-chart {
-  width: 100%;
-  min-width: 0;
-
-.source-note {
-  font-size: 12px;
-  color: #7b8b92;
-  font-style: italic;
-}
-  overflow: hidden;
-  margin: 20px 0;
-}
-
-.chart-highlight {
-  font-size: 15px;
-  color: #367b83;
-  margin-bottom: 15px;
-}
-
-.chart-highlight strong {
-  font-size: 25px;
-  margin-right: 6px;
-}
-
-.chart-note {
-  font-size: 12px;
-  color: #63747c;
-  font-style: italic;
-  margin-top: 8px;
-  line-height: 1.5;
-}
-
-/* Keep Vega-Lite charts inside their cards */
-.chart-card {
-  min-width: 0;
-}
-
-.vega-chart {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  overflow: visible;
-}
-
-
-.vega-chart .vega-embed {
-  width: 100%;
-}
-
-.vega-chart canvas,
-.vega-chart svg {
-  max-width: 100%;
-  height: auto;
-}
-

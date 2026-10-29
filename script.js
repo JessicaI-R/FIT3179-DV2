@@ -38,6 +38,11 @@ const charts = [
     id: "chart7",
     path: "js/workforce_headcount_map.vg.json",
     axisAllowance: 100
+  },
+  {
+    id: "chart8",
+    path: "js/workforce_state_profession_heatmap.vl.json",
+    axisAllowance: 260
   }
 ];
 

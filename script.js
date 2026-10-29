@@ -33,6 +33,11 @@ const charts = [
     id: "chart6",
     path: "js/workforce_density_map.vg.json",
     axisAllowance: 100
+  },
+  {
+    id: "chart7",
+    path: "js/workforce_headcount_map.vg.json",
+    axisAllowance: 100
   }
 ];
 

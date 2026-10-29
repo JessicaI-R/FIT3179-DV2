@@ -1,0 +1,196 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Average weekly working hours by healthcare profession and remoteness, Australia 2024.",
+  "title": {
+    "text": "Do Healthcare Workers Work Longer Hours in Remote Australia?",
+    "subtitle": "Average weekly working hours by profession and remoteness, 2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 18
+  },
+  "width": 650,
+  "height": 490,
+  "background": "white",
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_remoteness_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "headcount": "number",
+        "fte": "number",
+        "average_age": "number",
+        "average_weekly_hours": "number"
+      }
+    }
+  },
+
+  "params": [
+    {
+      "name": "selectedProfession",
+      "value": "All Professions",
+      "bind": {
+        "input": "select",
+        "name": "Highlight profession: ",
+        "options": [
+          "All Professions",
+          "Nurses and Midwives",
+          "Medical Practitioners",
+          "Physiotherapists",
+          "Psychologists",
+          "Pharmacists",
+          "Occupational Therapists",
+          "Dental Practitioners",
+          "Paramedicine Practitioners",
+          "Medical Radiation Practitioners",
+          "Optometrists",
+          "Chiropractors",
+          "Podiatrists",
+          "Chinese Medicine Practitioners",
+          "Osteopaths",
+          "ATSI Health Practitioners"
+        ]
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "filter": "datum.profession !== 'Total'"
+    },
+    {
+      "calculate": "selectedProfession === 'All Professions' || datum.profession === selectedProfession ? 1 : 0.2",
+      "as": "cellOpacity"
+    }
+  ],
+
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "white",
+    "strokeWidth": 2
+  },
+
+  "encoding": {
+    "x": {
+      "field": "remoteness_area",
+      "type": "ordinal",
+      "sort": [
+        "Major Cities",
+        "Inner Regional",
+        "Outer Regional",
+        "Remote Australia",
+        "Very Remote"
+      ],
+      "title": "Remoteness Area",
+      "axis": {
+        "orient": "top",
+        "labelAngle": -25,
+        "labelFontSize": 11,
+        "labelLimit": 135,
+        "labelPadding": 10,
+        "titleFontSize": 12,
+        "titlePadding": 20,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "profession",
+      "type": "ordinal",
+      "sort": [
+        "Nurses and Midwives",
+        "Medical Practitioners",
+        "Physiotherapists",
+        "Psychologists",
+        "Pharmacists",
+        "Occupational Therapists",
+        "Dental Practitioners",
+        "Paramedicine Practitioners",
+        "Medical Radiation Practitioners",
+        "Optometrists",
+        "Chiropractors",
+        "Podiatrists",
+        "Chinese Medicine Practitioners",
+        "Osteopaths",
+        "ATSI Health Practitioners"
+      ],
+      "title": null,
+      "axis": {
+        "labelFontSize": 11,
+        "labelLimit": 240,
+        "labelPadding": 10,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "color": {
+      "field": "average_weekly_hours",
+      "type": "quantitative",
+      "title": "Hours per week",
+      "scale": {
+        "domain": [20, 60],
+        "range": [
+          "#e0f1ed",
+          "#a7d5cd",
+          "#64aaa9",
+          "#247b85",
+          "#15535f"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 340,
+        "gradientThickness": 14,
+        "titleFontSize": 12,
+        "labelFontSize": 11,
+        "format": ".0f"
+      }
+    },
+    "opacity": {
+      "field": "cellOpacity",
+      "type": "quantitative",
+      "scale": null,
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "profession",
+        "type": "nominal",
+        "title": "Profession"
+      },
+      {
+        "field": "remoteness_area",
+        "type": "nominal",
+        "title": "Remoteness"
+      },
+      {
+        "field": "average_weekly_hours",
+        "type": "quantitative",
+        "title": "Average hours per week",
+        "format": ".1f"
+      },
+      {
+        "field": "headcount",
+        "type": "quantitative",
+        "title": "Registered practitioners",
+        "format": ",.0f"
+      },
+      {
+        "field": "fte",
+        "type": "quantitative",
+        "title": "FTE",
+        "format": ",.0f"
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

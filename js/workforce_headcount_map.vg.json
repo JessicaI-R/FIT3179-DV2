@@ -1,0 +1,247 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Proportional symbol map of Australia's registered healthcare workforce by state and territory, 2024",
+  "width": 650,
+  "height": 400,
+  "padding": {
+    "top": 55,
+    "left": 20,
+    "right": 20,
+    "bottom": 65
+  },
+  "autosize": "pad",
+  "background": "white",
+
+  "title": {
+    "text": "Where Are the Largest Healthcare Workforces?",
+    "subtitle": "Registered healthcare practitioners by state and territory, 2024",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 15
+  },
+
+  "data": [
+    {
+      "name": "states",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/australia_states_2026_simplified.geojson",
+      "format": {
+        "type": "json",
+        "property": "features"
+      }
+    },
+    {
+      "name": "workforce",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/workforce_state_2024.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "headcount": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.profession === 'Total'"
+        },
+        {
+          "type": "formula",
+          "as": "abbr",
+          "expr": "datum.state === 'New South Wales' ? 'NSW' : datum.state === 'Victoria' ? 'VIC' : datum.state === 'Queensland' ? 'QLD' : datum.state === 'Western Australia' ? 'WA' : datum.state === 'South Australia' ? 'SA' : datum.state === 'Tasmania' ? 'TAS' : datum.state === 'Northern Territory' ? 'NT' : 'ACT'"
+        },
+        {
+          "type": "formula",
+          "as": "lon",
+          "expr": "datum.state === 'New South Wales' ? 148 : datum.state === 'Victoria' ? 144.5 : datum.state === 'Queensland' ? 145 : datum.state === 'Western Australia' ? 121.5 : datum.state === 'South Australia' ? 135.5 : datum.state === 'Tasmania' ? 146.5 : datum.state === 'Northern Territory' ? 133.5 : 149.1"
+        },
+        {
+          "type": "formula",
+          "as": "lat",
+          "expr": "datum.state === 'New South Wales' ? -31 : datum.state === 'Victoria' ? -37 : datum.state === 'Queensland' ? -22 : datum.state === 'Western Australia' ? -26 : datum.state === 'South Australia' ? -30 : datum.state === 'Tasmania' ? -42 : datum.state === 'Northern Territory' ? -19 : -35.5"
+        },
+        {
+          "type": "formula",
+          "as": "share",
+          "expr": "datum.headcount / 756514 * 100"
+        },
+        {
+          "type": "geopoint",
+          "projection": "australia",
+          "fields": ["lon", "lat"],
+          "as": ["x", "y"]
+        }
+      ]
+    }
+  ],
+
+  "projections": [
+    {
+      "name": "australia",
+      "type": "identity",
+      "reflectY": true,
+      "fit": {
+        "signal": "data('states')"
+      },
+      "size": {
+        "signal": "[width, height]"
+      }
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "circleSize",
+      "type": "sqrt",
+      "domain": [0, 215000],
+      "range": [0, 2400],
+      "zero": true
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "shape",
+      "name": "mapBackground",
+      "interactive": false,
+      "from": {
+        "data": "states"
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "australia"
+        }
+      ],
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#e6eff0"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.2
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "name": "workforceCircles",
+      "from": {
+        "data": "workforce"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "size": {
+            "scale": "circleSize",
+            "field": "headcount"
+          },
+          "tooltip": {
+            "signal": "{'State / Territory': datum.state, 'Registered practitioners': format(datum.headcount, ',.0f'), 'Share of Australian workforce': format(datum.share, '.1f') + '%'}"
+          }
+        },
+        "update": {
+          "fill": {
+            "value": "#247b85"
+          },
+          "fillOpacity": {
+            "value": 0.75
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          }
+        },
+        "hover": {
+          "fill": {
+            "value": "#e49b59"
+          },
+          "fillOpacity": {
+            "value": 0.95
+          },
+          "stroke": {
+            "value": "#263b45"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "stateLabels",
+      "interactive": false,
+      "from": {
+        "data": "workforce"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "dy": {
+            "value": -28
+          },
+          "text": {
+            "field": "abbr"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "bottom"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#263b45"
+          }
+        }
+      }
+    }
+  ],
+
+  "legends": [
+    {
+      "size": "circleSize",
+      "title": "Registered practitioners",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "values": [10000, 50000, 100000, 200000],
+      "symbolFillColor": "#247b85",
+      "symbolFillOpacity": 0.75,
+      "symbolStrokeColor": "#ffffff",
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "format": ",.0f",
+      "offset": 20
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

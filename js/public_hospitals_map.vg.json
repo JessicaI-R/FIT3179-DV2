@@ -1,0 +1,205 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Geographical distribution of public hospitals across Australia, 2026",
+  "width": 650,
+  "height": 420,
+  "padding": {
+    "top": 55,
+    "left": 20,
+    "right": 20,
+    "bottom": 55
+  },
+  "autosize": "pad",
+  "background": "white",
+
+  "title": {
+    "text": "Where Are Australia's Public Hospitals?",
+    "subtitle": "Geographical distribution of public hospital locations, 2026",
+    "anchor": "start",
+    "fontSize": 17,
+    "subtitleFontSize": 12,
+    "offset": 15
+  },
+
+  "signals": [
+    {
+      "name": "dotSize",
+      "value": 22,
+      "bind": {
+        "input": "range",
+        "min": 8,
+        "max": 80,
+        "step": 2,
+        "name": "Dot size: "
+      }
+    }
+  ],
+
+  "data": [
+    {
+      "name": "states",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/australia_states_2026_simplified.geojson",
+      "format": {
+        "type": "json",
+        "property": "features"
+      }
+    },
+    {
+      "name": "hospitals",
+      "url": "https://raw.githubusercontent.com/JessicaI-R/FIT3179-DV2/main/data/public_hospitals_2026.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "longitude": "number",
+          "latitude": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "isValid(datum.longitude) && isValid(datum.latitude)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.longitude >= 112 && datum.longitude <= 154 && datum.latitude >= -44.5 && datum.latitude <= -10"
+        },
+        {
+          "type": "geopoint",
+          "projection": "australia",
+          "fields": ["longitude", "latitude"],
+          "as": ["x", "y"]
+        }
+      ]
+    }
+  ],
+
+  "projections": [
+    {
+      "name": "australia",
+      "type": "identity",
+      "reflectY": true,
+      "fit": {
+        "signal": "data('states')"
+      },
+      "size": {
+        "signal": "[width, height]"
+      }
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "shape",
+      "name": "mapBackground",
+      "interactive": false,
+      "from": {
+        "data": "states"
+      },
+      "transform": [
+        {
+          "type": "geoshape",
+          "projection": "australia"
+        }
+      ],
+      "encode": {
+        "enter": {
+          "fill": {
+            "value": "#e8eff0"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.2
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "name": "hospitalDots",
+      "from": {
+        "data": "hospitals"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "tooltip": {
+            "signal": "{'Hospital': datum.hospital_name, 'Location': datum.suburb, 'State': datum.state, 'Hospital type': datum.hospital_type}"
+          }
+        },
+        "update": {
+          "size": {
+            "signal": "dotSize"
+          },
+          "fill": {
+            "value": "#247b85"
+          },
+          "fillOpacity": {
+            "value": 0.72
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 0.3
+          }
+        },
+        "hover": {
+          "size": {
+            "signal": "dotSize * 3"
+          },
+          "fill": {
+            "value": "#e49b59"
+          },
+          "fillOpacity": {
+            "value": 1
+          },
+          "stroke": {
+            "value": "#263b45"
+          },
+          "strokeWidth": {
+            "value": 1.2
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 10
+          },
+          "y": {
+            "signal": "height + 25"
+          },
+          "text": {
+            "value": "●  Each dot represents one public hospital"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#247b85"
+          }
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}
